@@ -1,0 +1,15 @@
+version: 0.2
+
+phases:
+  pre-build:
+    commands:
+      - flutter pub get
+  build:
+    commands:
+      - flutter build web
+  
+artifacts:
+  files:
+    - '**/*'
+  discard-paths: no
+  base-directory: build
