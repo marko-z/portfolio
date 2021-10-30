@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
         ]),
         decoration: const BoxDecoration(
             image: DecorationImage(
-          image: AssetImage('assets/tic-tac-toe.png'),
+          image: AssetImage('assets/assets/tic-tac-toe.png'),
           repeat: ImageRepeat.repeat,
         )),
       ),
