@@ -15,7 +15,7 @@ class ImageWidget extends StatelessWidget {
   build(BuildContext context) {
     return Positioned.fill(
       child: Image.asset(
-        'tic-tac-toe.png',
+        'assets/tic-tac-toe.png',
         repeat: ImageRepeat.repeat,
       ),
     );
