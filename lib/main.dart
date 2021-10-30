@@ -15,7 +15,7 @@ class ImageWidget extends StatelessWidget {
   build(BuildContext context) {
     return Positioned.fill(
       child: Image.asset(
-        'assets/tic-tac-toe.png',
+        'tic-tac-toe.png',
         repeat: ImageRepeat.repeat,
       ),
     );
@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
         ]),
         decoration: const BoxDecoration(
             image: DecorationImage(
-          image: AssetImage('assets/assets/tic-tac-toe.png'),
+          image: AssetImage('assets/tic-tac-toe.png'),
           repeat: ImageRepeat.repeat,
         )),
       ),
