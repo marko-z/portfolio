@@ -5,6 +5,68 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:html';
 
+class Details extends StatelessWidget {
+  final int id;
+
+  const Details({Key? key, required this.id}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      child: SingleChildScrollView(
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 600),
+            child: Column(
+              children: <Widget>[
+                Hero(
+                  tag: Provider.of<CardModel>(context).cardList[id]['title'],
+                  child: SizedBox(
+                    height: 400,
+                    child: OverflowBox(
+                      minWidth: 0,
+                      minHeight: 0,
+                      maxWidth: double.infinity,
+                      child: Image.network(
+                        Provider.of<CardModel>(context).cardList[id]
+                            ['image_url'],
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ),
+                ListTile(
+                  title: Text(
+                    Provider.of<CardModel>(context).cardList[id]['title'],
+                    style: const TextStyle(fontSize: 36),
+                  ),
+                  trailing: IconButton(
+                    icon: const Icon(
+                      Icons.close_outlined,
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ),
+                IconRow(
+                    url_github: Provider.of<CardModel>(context).cardList[id]
+                        ['url_github'],
+                    url_host: Provider.of<CardModel>(context).cardList[id]
+                        ['url_host']),
+                Text(
+                  Provider.of<CardModel>(context).cardList[id]['description'],
+                  style: const TextStyle(fontSize: 12),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class RowItem extends StatelessWidget {
   RowItem({Key? key, required this.icon, required this.text}) : super(key: key);
 
@@ -74,69 +136,6 @@ class IconRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: IconList,
-      ),
-    );
-  }
-}
-
-class Details extends StatelessWidget {
-  final int id;
-
-  const Details({Key? key, required this.id}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      child: SingleChildScrollView(
-        child: Center(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 600),
-            child: Column(
-              children: <Widget>[
-                Hero(
-                  tag: Provider.of<CardModel>(context).cardList[id]['title'],
-                  child: SizedBox(
-                    height: 400,
-                    child: OverflowBox(
-                      minWidth: 0,
-                      minHeight: 0,
-                      maxWidth: double.infinity,
-                      child: Image(
-                        // as opposed to the regular Image.asset()
-                        image: AssetImage(Provider.of<CardModel>(context)
-                            .cardList[id]['image']),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                ),
-                ListTile(
-                  title: Text(
-                    Provider.of<CardModel>(context).cardList[id]['title'],
-                    style: const TextStyle(fontSize: 36),
-                  ),
-                  trailing: IconButton(
-                    icon: const Icon(
-                      Icons.close_outlined,
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ),
-                IconRow(
-                    url_github: Provider.of<CardModel>(context).cardList[id]
-                        ['url_github'],
-                    url_host: Provider.of<CardModel>(context).cardList[id]
-                        ['url_host']),
-                Text(
-                  Provider.of<CardModel>(context).cardList[id]['description'],
-                  style: const TextStyle(fontSize: 12),
-                ),
-              ],
-            ),
-          ),
-        ),
       ),
     );
   }

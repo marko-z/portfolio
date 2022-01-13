@@ -1,13 +1,13 @@
 import 'dart:html';
 import 'dart:async';
 import 'dart:convert';
-import 'dart:js';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:portfolio/details.dart';
 import 'package:portfolio/home.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
   runApp(
@@ -22,14 +22,22 @@ class CardModel extends ChangeNotifier {
   var cardList = [];
   var filteredCardList = [];
 
-  fetchCardListData() async {
-    final String response = await rootBundle.loadString('assets/appcards.json');
-    final data = await json.decode(response)['appcards'];
-    return data;
+  Future<List<dynamic>> fetchCardListData() async {
+    // final String response = await rootBundle.loadString('assets/appcards.json');
+    final response = await http.get(
+      Uri.parse(
+          'https://mz-portfolio-resources.s3.eu-north-1.amazonaws.com/appcards.json'),
+    );
+    if (response.statusCode == 200) {
+      List<dynamic> mapResult = json.decode(response.body)['appcards'];
+      return mapResult;
+    } else {
+      throw Exception('Failed to load');
+    }
   }
 
   CardModel() {
-    var futureData = fetchCardListData();
+    Future futureData = fetchCardListData();
     futureData.then((newData) {
       cardList = List.from(newData);
       filteredCardList = List.from(newData);

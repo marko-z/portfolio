@@ -70,32 +70,29 @@ class AppCardList extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimationLimiter(
       child: GridView.count(
-          // padding: const EdgeInsets.all(16),
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true, //but this isn't optimal though?
-          crossAxisCount: 2,
-          children: Provider.of<CardModel>(context).filteredCardList.mapIndexed(
-            (index, data) {
-              return AnimationConfiguration.staggeredGrid(
-                columnCount: 2,
-                position: index,
-                duration: const Duration(milliseconds: 1000),
-                child: ScaleAnimation(
-                  // verticalOffset: 50,
-                  child: FadeInAnimation(
-                    child: AppCard(
-                      id: data['id'],
-                      title: data['title'],
-                      image: data['image'],
-                      descriptionShort: data['description_short'],
-                    ),
-                  ),
+        // padding: const EdgeInsets.all(16),
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true, //but this isn't optimal though?
+        crossAxisCount: 2,
+        children: Provider.of<CardModel>(context).filteredCardList.mapIndexed(
+          (index, data) {
+            print('index: $index, data: $data');
+            return AnimationConfiguration.staggeredGrid(
+              columnCount: 2,
+              position: index,
+              duration: const Duration(milliseconds: 1000),
+              child: ScaleAnimation(
+                // verticalOffset: 50,
+                child: FadeInAnimation(
+                  child: AppCard.fromJson(data),
                 ),
-              );
-            },
-          ).toList()),
+              ),
+            );
+          },
+        ).toList(),
+      ),
     );
   }
 }
@@ -105,14 +102,23 @@ class AppCard extends StatelessWidget {
     Key? key,
     required this.id,
     required this.title,
-    required this.image,
+    required this.imageUrl,
     required this.descriptionShort,
   }) : super(key: key);
 
   final int id;
   final String title;
-  final String image;
+  final String imageUrl;
   final String descriptionShort;
+
+  factory AppCard.fromJson(Map<String, dynamic> json) {
+    return AppCard(
+      id: json["id"],
+      title: json["title"],
+      imageUrl: json["image_url"],
+      descriptionShort: json["description_short"],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -129,14 +135,9 @@ class AppCard extends StatelessWidget {
                   Expanded(
                     child: Hero(
                       tag: title,
-                      child: Container(
-                        // as opposed to the regular Image.asset()
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(image),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+                      child: Image.network(
+                        imageUrl,
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),

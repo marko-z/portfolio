@@ -4,7 +4,7 @@
             "id": 0,
             "url_host": "https://marekz-chatter.herokuapp.com",
             "url_github": "https://github.com/marko-z/chatter",
-            "image": "assets/chatter.png",
+            "image_url": "https://mz-portfolio-resources.s3.eu-north-1.amazonaws.com/chatter.png",
             "title": "Chatter App1",
             "description_short": "Test short description",
             "description": "Test description 1 Lorem ipsum dolor"
@@ -12,7 +12,7 @@
         {
             "id": 1,
             "url": "https://markoz-chatter.heroku.com",
-            "image": "assets/pogchamp.jpg",
+            "image_url": "https://mz-portfolio-resources.s3.eu-north-1.amazonaws.com/pogchamp.jpg",
             "title": "Chatter App2",
             "description_short": "Test short description",
             "description": "Test description 2 Lorem ipsum dolor"
@@ -20,7 +20,7 @@
         {
             "id": 2,
             "url": "https://markoz-chatter.heroku.com",
-            "image": "assets/chatter.png",
+            "image_url": "https://mz-portfolio-resources.s3.eu-north-1.amazonaws.com/pogchamp.jpg",
             "title": "Okaytest1",
             "description_short": "Test short description",
             "description": "Test description 3 Lorem ipsum dolor"
@@ -28,7 +28,7 @@
         {
             "id": 3,
             "url": "https://markoz-chatter.heroku.com",
-            "image": "assets/tall.jfif",
+            "image_url": "https://mz-portfolio-resources.s3.eu-north-1.amazonaws.com/spikes.png",
             "title": "Okaytest2",
             "description_short": "Test short description",
             "description": "Test description 4 Lorem ipsum dolor"
