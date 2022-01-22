@@ -6,18 +6,8 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'dart:convert';
 
-class AppCardWindow extends StatefulWidget {
+class AppCardWindow extends StatelessWidget {
   const AppCardWindow({Key? key}) : super(key: key);
-
-  @override
-  _AppCardWindowState createState() => _AppCardWindowState();
-}
-
-class _AppCardWindowState extends State<AppCardWindow> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +19,11 @@ class _AppCardWindowState extends State<AppCardWindow> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               //const Expanded(child: Spacer()),
-              const Padding(
-                padding: EdgeInsets.only(left: 10),
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
                 child: Text(
                   'My Apps',
-                  style: TextStyle(
-                    fontSize: 30,
-                  ),
+                  style: Theme.of(context).textTheme.headline5,
                 ),
               ),
               Container(
@@ -78,7 +66,6 @@ class AppCardList extends StatelessWidget {
         crossAxisCount: 2,
         children: Provider.of<CardModel>(context).filteredCardList.mapIndexed(
           (index, data) {
-            print('index: $index, data: $data');
             return AnimationConfiguration.staggeredGrid(
               columnCount: 2,
               position: index,
@@ -144,20 +131,9 @@ class AppCard extends StatelessWidget {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        title,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        descriptionShort,
-                        style: const TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      Text(title, style: Theme.of(context).textTheme.headline6),
+                      Text(descriptionShort,
+                          style: Theme.of(context).textTheme.bodyText2),
                     ],
                   ),
                 ],

@@ -8,6 +8,7 @@ import 'package:portfolio/details.dart';
 import 'package:portfolio/home.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(
@@ -80,7 +81,13 @@ class _MyAppState extends State<MyApp> {
           );
         }
       },
-      theme: ThemeData(primarySwatch: Colors.blue),
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        fontFamily: '',
+        textTheme: GoogleFonts.latoTextTheme(
+          Theme.of(context).textTheme,
+        ),
+      ),
     );
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:portfolio/main.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'dart:html';
 
 class Details extends StatelessWidget {
@@ -35,18 +35,39 @@ class Details extends StatelessWidget {
                     ),
                   ),
                 ),
-                ListTile(
-                  title: Text(
-                    Provider.of<CardModel>(context).cardList[id]['title'],
-                    style: const TextStyle(fontSize: 36),
-                  ),
-                  trailing: IconButton(
-                    icon: const Icon(
-                      Icons.close_outlined,
+                Stack(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          Provider.of<CardModel>(context).cardList[id]['title'],
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(fontSize: 36),
+                        ),
+                      ],
                     ),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        IconButton(
+                          icon: const Icon(
+                            Icons.close_outlined,
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 16.0, bottom: 24.0),
+                  child: MarkdownBody(
+                    //this one doesn't expanded like a retard
+                    data: Provider.of<CardModel>(context).cardList[id]
+                        ['description'],
                   ),
                 ),
                 IconRow(
@@ -54,10 +75,6 @@ class Details extends StatelessWidget {
                         ['url_github'],
                     url_host: Provider.of<CardModel>(context).cardList[id]
                         ['url_host']),
-                Text(
-                  Provider.of<CardModel>(context).cardList[id]['description'],
-                  style: const TextStyle(fontSize: 12),
-                ),
               ],
             ),
           ),
@@ -68,7 +85,8 @@ class Details extends StatelessWidget {
 }
 
 class RowItem extends StatelessWidget {
-  RowItem({Key? key, required this.icon, required this.text}) : super(key: key);
+  const RowItem({Key? key, required this.icon, required this.text})
+      : super(key: key);
 
   final FaIcon icon;
   final Text text;
@@ -92,7 +110,7 @@ class IconRow extends StatelessWidget {
     Key? key,
     this.url_host,
     this.url_github,
-  });
+  }) : super(key: key);
 
   final url_host;
   final url_github;
@@ -106,10 +124,9 @@ class IconRow extends StatelessWidget {
         onTap: () {
           window.open(url_host, 'new tab');
         },
-        child: RowItem(
-          icon: const FaIcon(FontAwesomeIcons.externalLinkAlt,
-              color: Colors.grey),
-          text: const Text('Hosted link',
+        child: const RowItem(
+          icon: FaIcon(FontAwesomeIcons.externalLinkAlt, color: Colors.grey),
+          text: Text('Hosted link',
               style: TextStyle(fontSize: 12, color: Colors.grey)),
         ),
       ));
