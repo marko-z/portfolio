@@ -62,19 +62,20 @@ class Details extends StatelessWidget {
                     ),
                   ],
                 ),
+                IconRow(
+                  url_github: Provider.of<CardModel>(context).cardList[id]
+                      ['url_github'],
+                  url_host: Provider.of<CardModel>(context).cardList[id]
+                      ['url_host'],
+                ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 16.0, bottom: 24.0),
+                  padding: const EdgeInsets.only(top: 8.0, bottom: 24.0),
                   child: MarkdownBody(
                     //this one doesn't expanded like a retard
                     data: Provider.of<CardModel>(context).cardList[id]
                         ['description'],
                   ),
                 ),
-                IconRow(
-                    url_github: Provider.of<CardModel>(context).cardList[id]
-                        ['url_github'],
-                    url_host: Provider.of<CardModel>(context).cardList[id]
-                        ['url_host']),
               ],
             ),
           ),

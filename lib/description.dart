@@ -63,7 +63,7 @@ class Description extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 24.0),
-                    child: Text(
+                    child: SelectableText(
                       'Contact me at\nm.zakrzwsk@gmail.com',
                       style: Theme.of(context).textTheme.bodyText2,
                       textAlign: TextAlign.center,
